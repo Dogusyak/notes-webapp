@@ -34,7 +34,6 @@ export const AppContent: FC = () => {
       finished: false,
     };
     setTodoList([...todoList, data]);
-    alert("Todo added successfully!");
   };
 
   const completeTodo = (id: number): void => {
@@ -42,11 +41,21 @@ export const AppContent: FC = () => {
       todoList.map(
         (todo: ITask): ITask =>
           todo.id === id
-            ? Object.assign(todo, { completed: true }) && todo
+            ? Object.assign(todo, { finished: true }) && todo
             : todo
       )
     );
-    alert("Task has been completed!");
+  };
+
+  const undoCompleteTodo = (id: number): void => {
+    setTodoList(
+      todoList.map(
+        (todo: ITask): ITask =>
+          todo.id === id
+            ? Object.assign(todo, { finished: false }) && todo
+            : todo
+      )
+    );
   };
 
   const deleteTodo = (id: number): void => {
@@ -55,7 +64,6 @@ export const AppContent: FC = () => {
         todo.id !== id ? todo : null
       )
     );
-    alert("Task has been deleted successfully!");
   };
 
   return (
@@ -68,6 +76,7 @@ export const AppContent: FC = () => {
               key={key}
               todo={todo}
               completeTodo={completeTodo}
+              undoCompleteTodo={undoCompleteTodo}
               deleteTodo={deleteTodo}
             />
           ))}

@@ -1,4 +1,4 @@
-.todo {
+.todolist {
     height: 40px;
     width: 100%;
     margin: 5px 0;
@@ -7,25 +7,28 @@
     justify-content: center;
     padding: 10px 0px;
   }
-  .todo h1 {
+  .todolist h1 {
     text-align: center;
     flex: 80%;
     padding: 10px 0;
   }
-  .todo h1:hover {
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+  .todolist h2 {
+    text-align: center;
+    flex: 80%;
+    padding: 10px 0;
   }
-  .todo button {
+
+  .todolist button {
     flex: 1;
     width: 100%;
     height: 100%;
     display: block;
-    cursor: pointer;
+    cursor: text;
     color: #fff;
-    background-color: rgb(224, 14, 14);
-    border: 1px solid rgb(214, 11, 11);
+    background-color: rgb(255, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
   }
-  .todo div {
+  .todolist div {
     flex: 1;
     width: 100%;
     height: 100%;

@@ -58,6 +58,18 @@ export const AppContent: FC = () => {
     );
   };
 
+  const setChecked = (id: number): boolean => {
+    var value = (todoList).find(x => x.id === id);
+      if(value?.finished)
+      {
+      return true as boolean;
+      }
+      else
+      {
+        return false as boolean;
+      }
+  };
+
   const deleteTodo = (id: number): void => {
     setTodoList(
       todoList.filter((todo: ITask): ITask | null =>
@@ -75,6 +87,7 @@ export const AppContent: FC = () => {
             <TodoList
               key={key}
               todo={todo}
+              setChecked={setChecked}
               completeTodo={completeTodo}
               undoCompleteTodo={undoCompleteTodo}
               deleteTodo={deleteTodo}

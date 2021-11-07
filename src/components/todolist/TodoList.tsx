@@ -7,12 +7,13 @@ import "./TodoList.css";
 interface Props {
   todo: ITask;
   key: number;
+  setChecked(id:number):boolean;
   completeTodo(id: number): void;
   undoCompleteTodo(id:number):void;
   deleteTodo: (id: number) => void;
 }
 
-const TodoList: FC<Props> = ({ todo, key, completeTodo, undoCompleteTodo, deleteTodo }) => {
+const TodoList: FC<Props> = ({ todo, key,setChecked, completeTodo, undoCompleteTodo, deleteTodo }) => {
   const todoComplete = (): void => {
     if (!todo.finished) {
       completeTodo(todo.id);
@@ -29,8 +30,10 @@ const TodoList: FC<Props> = ({ todo, key, completeTodo, undoCompleteTodo, delete
 
   return (
     <div key={key} className="todolist">  
-      <input type="checkbox" id="finished" onChange={todoComplete}></input>
-      <label> <StarRating/></label>
+      <input type="checkbox" id="finished" checked={setChecked(todo.id)} onChange={todoComplete}></input>
+      <div id="startrating">
+      <StarRating></StarRating>
+      </div>
       <h1
         style={
           todo.finished ? { pointerEvents: "none" } : { cursor: "pointer" }

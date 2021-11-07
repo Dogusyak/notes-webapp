@@ -8,12 +8,13 @@ interface Props {
   todo: ITask;
   key: number;
   setChecked(id:number):boolean;
+  rateTodo(id:number, importance:number):void;
   completeTodo(id: number): void;
   undoCompleteTodo(id:number):void;
   deleteTodo: (id: number) => void;
 }
 
-const TodoList: FC<Props> = ({ todo, key,setChecked, completeTodo, undoCompleteTodo, deleteTodo }) => {
+const TodoList: FC<Props> = ({ todo, key,setChecked, rateTodo, completeTodo, undoCompleteTodo, deleteTodo }) => {
   const todoComplete = (): void => {
     if (!todo.finished) {
       completeTodo(todo.id);
@@ -27,6 +28,10 @@ const TodoList: FC<Props> = ({ todo, key,setChecked, completeTodo, undoCompleteT
   const todoDelete = (): void => {
     deleteTodo(todo.id);
   };
+
+  const todoRating =(): void =>{
+    rateTodo(todo.id, todo.importance);
+  }
 
   return (
     <div key={key} className="todolist">  

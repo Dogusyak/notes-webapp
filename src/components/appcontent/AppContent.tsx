@@ -36,6 +36,17 @@ export const AppContent: FC = () => {
     setTodoList([...todoList, data]);
   };
 
+  const rateTodo = (id: number, importance:number): void => {
+    setTodoList(
+      todoList.map(
+        (todo: ITask): ITask =>
+          todo.id === id
+            ? Object.assign(todo, { importance : importance }) && todo
+            : todo
+      )
+    );
+  };
+
   const completeTodo = (id: number): void => {
     setTodoList(
       todoList.map(
@@ -88,6 +99,7 @@ export const AppContent: FC = () => {
               key={key}
               todo={todo}
               setChecked={setChecked}
+              rateTodo={rateTodo}
               completeTodo={completeTodo}
               undoCompleteTodo={undoCompleteTodo}
               deleteTodo={deleteTodo}

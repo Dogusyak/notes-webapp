@@ -34,7 +34,17 @@ export const AppContent: FC = () => {
       finished: false,
     };
     setTodoList([...todoList, data]);
-    alert("Todo added successfully!");
+  };
+
+  const rateTodo = (id: number, importance:number): void => {
+    setTodoList(
+      todoList.map(
+        (todo: ITask): ITask =>
+          todo.id === id
+            ? Object.assign(todo, { importance : importance }) && todo
+            : todo
+      )
+    );
   };
 
   const completeTodo = (id: number): void => {
@@ -42,11 +52,33 @@ export const AppContent: FC = () => {
       todoList.map(
         (todo: ITask): ITask =>
           todo.id === id
-            ? Object.assign(todo, { completed: true }) && todo
+            ? Object.assign(todo, { finished: true }) && todo
             : todo
       )
     );
-    alert("Task has been completed!");
+  };
+
+  const undoCompleteTodo = (id: number): void => {
+    setTodoList(
+      todoList.map(
+        (todo: ITask): ITask =>
+          todo.id === id
+            ? Object.assign(todo, { finished: false }) && todo
+            : todo
+      )
+    );
+  };
+
+  const setChecked = (id: number): boolean => {
+    var value = (todoList).find(x => x.id === id);
+      if(value?.finished)
+      {
+      return true as boolean;
+      }
+      else
+      {
+        return false as boolean;
+      }
   };
 
   const deleteTodo = (id: number): void => {
@@ -55,7 +87,6 @@ export const AppContent: FC = () => {
         todo.id !== id ? todo : null
       )
     );
-    alert("Task has been deleted successfully!");
   };
 
   return (
@@ -67,7 +98,10 @@ export const AppContent: FC = () => {
             <TodoList
               key={key}
               todo={todo}
+              setChecked={setChecked}
+              rateTodo={rateTodo}
               completeTodo={completeTodo}
+              undoCompleteTodo={undoCompleteTodo}
               deleteTodo={deleteTodo}
             />
           ))}

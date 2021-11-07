@@ -23,8 +23,8 @@
     cursor: pointer;
     appearance: none !important;
     -webkit-appearance: none !important;
-    border: 1px solid #017bf5;
+    border: 1px solid #000000;
     border-left: 0;
-    background-color: #017bf5;
-    color: #fff;
+    background-color: #ff0000;
+    color: rgb(0, 0, 0);
   }

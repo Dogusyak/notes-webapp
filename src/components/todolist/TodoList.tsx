@@ -1,19 +1,27 @@
-import React, { FC, MouseEventHandler } from "react";
+import React, { FC } from "react";
 import { ITask } from "../../models/ITask";
+import StarRating from "../starrating/StarRating";
 
 import "./TodoList.css";
 
 interface Props {
   todo: ITask;
   key: number;
+  setChecked(id:number):boolean;
+  rateTodo(id:number, importance:number):void;
   completeTodo(id: number): void;
+  undoCompleteTodo(id:number):void;
   deleteTodo: (id: number) => void;
 }
 
-const TodoList: FC<Props> = ({ todo, key, completeTodo, deleteTodo }) => {
+const TodoList: FC<Props> = ({ todo, key,setChecked, rateTodo, completeTodo, undoCompleteTodo, deleteTodo }) => {
   const todoComplete = (): void => {
     if (!todo.finished) {
       completeTodo(todo.id);
+    }
+    else
+    {
+      undoCompleteTodo(todo.id);
     }
   };
 
@@ -21,10 +29,17 @@ const TodoList: FC<Props> = ({ todo, key, completeTodo, deleteTodo }) => {
     deleteTodo(todo.id);
   };
 
+  const todoRating =(): void =>{
+    rateTodo(todo.id, todo.importance);
+  }
+
   return (
-    <div key={key} className="todo">
+    <div key={key} className="todolist">  
+      <input type="checkbox" id="finished" checked={setChecked(todo.id)} onChange={todoComplete}></input>
+      <div id="startrating">
+      <StarRating></StarRating>
+      </div>
       <h1
-        onClick={todoComplete}
         style={
           todo.finished ? { pointerEvents: "none" } : { cursor: "pointer" }
         }
@@ -37,8 +52,9 @@ const TodoList: FC<Props> = ({ todo, key, completeTodo, deleteTodo }) => {
           todo.content
         )}
       </h1>
+
       {todo.finished ? (
-        <button type="button" onClick={todoDelete}>
+        <button name="delete" type="button" onClick={todoDelete}>
           Delete
         </button>
       ) : (

@@ -13,7 +13,7 @@
   .todoForm .form-group input:not([type="submit"]) {
     flex: 90%;
     padding: 10px 15px;
-    border: 1px solid #017bf5;
+    border: 1px solid #1abc9c;
     border-right: 0;
     outline: none;
   }
@@ -23,8 +23,14 @@
     cursor: pointer;
     appearance: none !important;
     -webkit-appearance: none !important;
-    border: 1px solid #000000;
     border-left: 0;
-    background-color: #ff0000;
+    color: rgb(255, 251, 251);
+    background-color:#1abc9c;
+    border: 1px solid rgb(150, 179, 83);
+    transition-duration: 0.4s;
+  }
+
+  .todoForm .form-group input[type="submit"]:hover{
+    background-color: #97d4c8; /* Green */
     color: rgb(0, 0, 0);
   }

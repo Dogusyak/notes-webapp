@@ -1,10 +1,10 @@
 import React, { FC, useState } from "react";
 import { ITask } from "../../models/ITask";
-
 import TodoForm from "../../components/todoform/TodoForm";
-
-import "./AppContent.css";
+import ShowAll from "../showall/ShowAll";
 import TodoList from "../../components/todolist/TodoList";
+import "./AppContent.css";
+
 
 export const AppContent: FC = () => {
   const [todoList, setTodoList] = useState<ITask[]>([
@@ -21,6 +21,17 @@ export const AppContent: FC = () => {
         finished: true,
     },
   ]);
+
+  let showAll =(isChecked:boolean):boolean=>{
+    if(!isChecked)
+    {
+    return true as boolean;
+    }
+    else
+    {
+      return false as boolean;
+    }
+  }
 
   const addTodo = (todo: string): void => {
     if (!todo) {
@@ -93,6 +104,7 @@ export const AppContent: FC = () => {
     <div className="app">
       <div className="container">
         <TodoForm addTodo={addTodo} />
+        <ShowAll showAll={showAll}/>
         <div className="todoList">
           {todoList.map((todo: ITask, key: number) => (
             <TodoList

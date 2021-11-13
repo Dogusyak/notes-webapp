@@ -32,13 +32,10 @@ const TodoList: FC<Props> = ({ todo, key,setChecked, rateTodo, completeTodo, und
   const todoRating =(): void =>{
     rateTodo(todo.id, todo.importance);
   }
-
   return (
     <div key={key} className="todolist">  
-      <input type="checkbox" id="finished" checked={setChecked(todo.id)} onChange={todoComplete}></input>
-      <div id="startrating">
-      <StarRating></StarRating>
-      </div>
+      <input type="checkbox" id="todoCheckbox" checked={setChecked(todo.id)} onChange={todoComplete}></input>
+      <StarRating/>
       <h1
         style={
           todo.finished ? { pointerEvents: "none" } : { cursor: "pointer" }
@@ -54,7 +51,7 @@ const TodoList: FC<Props> = ({ todo, key,setChecked, rateTodo, completeTodo, und
       </h1>
 
       {todo.finished ? (
-        <button name="delete" type="button" onClick={todoDelete}>
+        <button id="delete" type="button" onClick={todoDelete}>
           Delete
         </button>
       ) : (

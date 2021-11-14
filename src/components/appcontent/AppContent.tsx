@@ -7,6 +7,8 @@ import "./AppContent.css";
 
 
 export const AppContent: FC = () => {
+  const [todoListFiltered , setFilteredTodoList] = useState<ITask[]>([]);
+  const [todoListSearched , setSearchedTodoList] = useState<ITask[]>([]);
   const [todoList, setTodoList] = useState<ITask[]>([
     {
       id: 1,
@@ -22,13 +24,53 @@ export const AppContent: FC = () => {
     },
   ]);
 
+  const filterTask= (todoName: string): void => {
+  {
+      const list:ITask[] =[];
+      todoList.forEach(element => {
+      if(element.content.toLowerCase().includes(todoName.toLowerCase()))
+      {
+        list.push(element)
+      }
+      });
+
+      list.forEach(element => {
+        setSearchedTodoList([...todoListSearched, element]); 
+      });
+    }
+  }
+
   let showAll =(isChecked:boolean):boolean=>{
     if(!isChecked)
     {
-    return true as boolean;
+      todoList.forEach(element => {
+        setFilteredTodoList([...todoListFiltered, element]);
+      });
+
+      todoList.forEach(element => {
+        todoList.splice(todoList.length-1, 1)       
+      });
+
+      const list: ITask[] = todoList.filter(
+        (todo: ITask) =>
+          todo.finished ===  false
+      );
+
+      list.forEach(element => {
+        setTodoList([...todoList, element]);
+      });
+
+      return true as boolean;
     }
     else
     {
+      if(todoListFiltered.length >0)
+      {
+        todoListFiltered.forEach(element => {
+        setTodoList([...todoList, element]);
+      });
+      }
+
       return false as boolean;
     }
   }
@@ -67,11 +109,27 @@ export const AppContent: FC = () => {
             : todo
       )
     );
+    setFilteredTodoList(
+      todoListFiltered.map(
+        (todo: ITask): ITask =>
+          todo.id === id
+            ? Object.assign(todo, { finished: true }) && todo
+            : todo
+      )
+    );
   };
 
   const undoCompleteTodo = (id: number): void => {
     setTodoList(
       todoList.map(
+        (todo: ITask): ITask =>
+          todo.id === id
+            ? Object.assign(todo, { finished: false }) && todo
+            : todo
+      )
+    );
+    setFilteredTodoList(
+      todoListFiltered.map(
         (todo: ITask): ITask =>
           todo.id === id
             ? Object.assign(todo, { finished: false }) && todo
@@ -103,7 +161,7 @@ export const AppContent: FC = () => {
   return (
     <div className="app">
       <div className="container">
-        <TodoForm addTodo={addTodo} />
+        <TodoForm addTodo={addTodo} searchTodo={filterTask}/>
         <ShowAll showAll={showAll}/>
         <div className="todoList">
           {todoList.map((todo: ITask, key: number) => (

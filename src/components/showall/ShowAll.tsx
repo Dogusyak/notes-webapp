@@ -6,7 +6,7 @@ interface Props {
   showAll: (isCheck:boolean) => boolean;
 }
 
-let checkBoxChecked:boolean = false;
+let checkBoxChecked:boolean = true;
 
 const ShowAllTodo:FC<Props>=({showAll})=>{
     const showAllRecords = (): void => {

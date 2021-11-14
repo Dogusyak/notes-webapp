@@ -7,8 +7,8 @@ import "./AppContent.css";
 
 
 export const AppContent: FC = () => {
-  const [todoListFiltered , setFilteredTodoList] = useState<ITask[]>([]);
-  const [todoListSearched , setSearchedTodoList] = useState<ITask[]>([]);
+  const [todoListAll, setTodoListAll] = useState<ITask[]>([]);
+  const [todoListUndone, setTodoListUndone] = useState<ITask[]>([]);
   const [todoList, setTodoList] = useState<ITask[]>([
     {
       id: 1,
@@ -20,8 +20,14 @@ export const AppContent: FC = () => {
         id: 2,
         content: "Windows cleaning",
         importance:1,
-        finished: true,
+        finished: false,
     },
+    {
+      id: 3,
+      content: "Hair Dresser",
+      importance:4,
+      finished: true,
+  }
   ]);
 
   const filterTask= (todoName: string): void => {
@@ -35,40 +41,30 @@ export const AppContent: FC = () => {
       });
 
       list.forEach(element => {
-        setSearchedTodoList([...todoListSearched, element]); 
+        setTodoList([...todoList, element]); 
       });
     }
   }
 
-  let showAll =(isChecked:boolean):boolean=>{
+  const showAll =(isChecked:boolean):boolean=>{
     if(!isChecked)
     {
-      todoList.forEach(element => {
-        setFilteredTodoList([...todoListFiltered, element]);
-      });
-
-      todoList.forEach(element => {
-        todoList.splice(todoList.length-1, 1)       
-      });
-
-      const list: ITask[] = todoList.filter(
-        (todo: ITask) =>
-          todo.finished ===  false
+      setTodoListAll(todoList)
+      setTodoListUndone(
+      todoList.filter(
+           (todo: ITask) =>
+             todo.finished ===  false
+         )
       );
-
-      list.forEach(element => {
-        setTodoList([...todoList, element]);
-      });
+      setTodoList(todoListUndone);
 
       return true as boolean;
     }
     else
     {
-      if(todoListFiltered.length >0)
+      if(todoListAll.length>0)
       {
-        todoListFiltered.forEach(element => {
-        setTodoList([...todoList, element]);
-      });
+      setTodoList(todoListAll);
       }
 
       return false as boolean;
@@ -109,27 +105,11 @@ export const AppContent: FC = () => {
             : todo
       )
     );
-    setFilteredTodoList(
-      todoListFiltered.map(
-        (todo: ITask): ITask =>
-          todo.id === id
-            ? Object.assign(todo, { finished: true }) && todo
-            : todo
-      )
-    );
   };
 
   const undoCompleteTodo = (id: number): void => {
     setTodoList(
       todoList.map(
-        (todo: ITask): ITask =>
-          todo.id === id
-            ? Object.assign(todo, { finished: false }) && todo
-            : todo
-      )
-    );
-    setFilteredTodoList(
-      todoListFiltered.map(
         (todo: ITask): ITask =>
           todo.id === id
             ? Object.assign(todo, { finished: false }) && todo

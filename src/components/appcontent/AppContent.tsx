@@ -50,6 +50,11 @@ export const AppContent: FC = () => {
     if(!isChecked)
     {
       setTodoListAll(todoList)
+
+    //   let todolist = todoList.filter(function (e) {
+    //     return e.finished ===  false;
+    // });
+
       setTodoListUndone(
       todoList.filter(
            (todo: ITask) =>

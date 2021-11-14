@@ -1,17 +1,19 @@
 import React, { FC, FormEvent, useState } from "react";
-
 import "./TodoForm.css";
 
 interface Props {
   addTodo(todo: string): void;
+  searchTodo(todoName:string):void;
 }
 
 const TodoForm: FC<Props> = ({ addTodo }) => {
   const [todo, setTodo] = useState<string>("");
+  const [todoName, searchTodo] = useState<string>("");
 
   const handleTodo = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     addTodo(todo);
+    searchTodo(todoName);
     setTodo("");
   };
   return (

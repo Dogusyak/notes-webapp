@@ -49,14 +49,9 @@ const TodoList: FC<Props> = ({ todo, key,setChecked, rateTodo, completeTodo, und
           todo.content
         )}
       </h1>
-
-      {todo.finished ? (
         <button id="delete" type="button" onClick={todoDelete}>
           Delete
         </button>
-      ) : (
-        <div></div>
-      )}
     </div>
   );
 };

@@ -15,7 +15,7 @@ const ShowAllTodo:FC<Props>=({showAll})=>{
     return (
       <div>
           <input type="checkbox" checked={checkBoxChecked} onChange={showAllRecords}/><span>Show All</span>
-          </div>
+      </div>
       );
   
 };

@@ -7,13 +7,13 @@ import "./AppContent.css";
 
 
 export const AppContent: FC = () => {
-  const [todoListAll, setTodoListAll] = useState<ITask[]>([]);
-  const [todoListUndone, setTodoListUndone] = useState<ITask[]>([]);
-  const [todoList, setTodoList] = useState<ITask[]>([
+  let [todoListAll, setTodoListAll] = useState<ITask[]>([]);
+  let [todoListUndone, setTodoListUndone] = useState<ITask[]>([]);
+  let [todoList, setTodoList] = useState<ITask[]>([
     {
       id: 1,
       content: "Car wash",
-      importance:0,
+      importance:1,
       finished: false,
     },
     {
@@ -25,7 +25,7 @@ export const AppContent: FC = () => {
     {
       id: 3,
       content: "Hair Dresser",
-      importance:4,
+      importance:1,
       finished: true,
   }
   ]);
@@ -47,13 +47,9 @@ export const AppContent: FC = () => {
   }
 
   const showAll =(isChecked:boolean):boolean=>{
-    if(!isChecked)
+    if(isChecked)
     {
       setTodoListAll(todoList)
-
-    //   let todolist = todoList.filter(function (e) {
-    //     return e.finished ===  false;
-    // });
 
       setTodoListUndone(
       todoList.filter(
@@ -63,7 +59,7 @@ export const AppContent: FC = () => {
       );
       setTodoList(todoListUndone);
 
-      return true as boolean;
+      return false as boolean;
     }
     else
     {
@@ -72,7 +68,7 @@ export const AppContent: FC = () => {
       setTodoList(todoListAll);
       }
 
-      return false as boolean;
+      return true as boolean;
     }
   }
 

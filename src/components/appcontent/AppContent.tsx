@@ -7,9 +7,9 @@ import "./AppContent.css";
 
 
 export const AppContent: FC = () => {
-  let [todoListAll, setTodoListAll] = useState<ITask[]>([]);
-  let [todoListUndone, setTodoListUndone] = useState<ITask[]>([]);
-  let [todoList, setTodoList] = useState<ITask[]>([
+
+  const [todoListAll, setTodoListAll] = useState<ITask[]>([]);
+  const [todoList, setTodoList] = useState<ITask[]>([
     {
       id: 1,
       content: "Car wash",
@@ -19,13 +19,13 @@ export const AppContent: FC = () => {
     {
         id: 2,
         content: "Windows cleaning",
-        importance:1,
+        importance:2,
         finished: false,
     },
     {
       id: 3,
       content: "Hair Dresser",
-      importance:1,
+      importance:3,
       finished: true,
   }
   ]);
@@ -46,29 +46,18 @@ export const AppContent: FC = () => {
     }
   }
 
-  const showAll =(isChecked:boolean):boolean=>{
-    if(isChecked)
+  const showAll =(isChecked:boolean):void=>{
+    if(!isChecked)
     {
-      setTodoListAll(todoList)
+      setTodoListAll(todoList);
 
-      setTodoListUndone(
-      todoList.filter(
-           (todo: ITask) =>
-             todo.finished ===  false
-         )
-      );
-      setTodoList(todoListUndone);
-
-      return false as boolean;
+      setTodoList(  todoList.filter(item => 
+        (item.finished === false)
+       ));
     }
     else
     {
-      if(todoListAll.length>0)
-      {
       setTodoList(todoListAll);
-      }
-
-      return true as boolean;
     }
   }
 
@@ -106,11 +95,29 @@ export const AppContent: FC = () => {
             : todo
       )
     );
+
+    setTodoListAll(
+      todoListAll.map(
+        (todo: ITask): ITask =>
+          todo.id === id
+            ? Object.assign(todo, { finished: true }) && todo
+            : todo
+      )
+    );
   };
 
   const undoCompleteTodo = (id: number): void => {
     setTodoList(
       todoList.map(
+        (todo: ITask): ITask =>
+          todo.id === id
+            ? Object.assign(todo, { finished: false }) && todo
+            : todo
+      )
+    );
+
+    setTodoListAll(
+      todoListAll.map(
         (todo: ITask): ITask =>
           todo.id === id
             ? Object.assign(todo, { finished: false }) && todo

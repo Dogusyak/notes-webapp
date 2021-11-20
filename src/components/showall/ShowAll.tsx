@@ -3,14 +3,23 @@ import { ITask } from "../../models/ITask";
 import "./ShowAll.css";
 
 interface Props {
-  showAll: (isCheck:boolean) => boolean;
+  showAll: (isCheck:boolean) => void;
 }
 
 let checkBoxChecked:boolean = true;
 
 const ShowAllTodo:FC<Props>=({showAll})=>{
     const showAllRecords = (): void => {
-      checkBoxChecked = showAll(checkBoxChecked);
+      if(checkBoxChecked)
+      {
+        showAll(false);
+        checkBoxChecked = false;
+      }
+      else
+      {
+        showAll(true);
+        checkBoxChecked = true;
+      }
     };
     return (
       <div>

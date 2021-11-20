@@ -24,7 +24,6 @@ const ShowAllTodo: FC<Props> = ({ showAll }) => {
       <input type="checkbox" checked={checkBoxChecked} onChange={showAllRecords} /><span>Show All</span>
     </div>
   );
-
 };
 
 export default ShowAllTodo;

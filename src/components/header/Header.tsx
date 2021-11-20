@@ -8,7 +8,6 @@ class TodoHeader extends React.Component<IHeaderProps, {}> {
         super(props, context);
     }
 
-
     public render() {
         return (
             <h1 className="header">Todo App {this.props.name}</h1>

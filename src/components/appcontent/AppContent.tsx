@@ -8,8 +8,8 @@ import "./AppContent.css";
 
 export const AppContent: FC = () => {
 
-  let [todoListAll, setTodoListAll] = useState<ITask[]>([]);
-  let [todoList, setTodoList] = useState<ITask[]>([
+  const [todoListAll, setTodoListAll] = useState<ITask[]>([]);
+  const [todoList, setTodoList] = useState<ITask[]>([
     {
       id: 1,
       content: "Car wash",

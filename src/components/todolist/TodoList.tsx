@@ -27,14 +27,16 @@ const TodoList: FC<Props> = ({ todo, key, setChecked, rateTodo, completeTodo, un
     deleteTodo(todo.id);
   };
 
-  const todoRating = (): void => {
-    rateTodo(todo.id, todo.importance);
-  }
 
   return (
     <div key={key} className="todolist">
       <input type="checkbox" id="todoCheckbox" checked={setChecked(todo.id)} onChange={todoComplete}></input>
-      <StarRating />
+      <div className="star-rating">
+            <StarRating
+              key={key}
+              todo={todo}
+            />
+        </div>
       <h1
         style={
           todo.finished ? { pointerEvents: "none" } : { cursor: "pointer" }

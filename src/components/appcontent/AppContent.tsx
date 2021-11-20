@@ -6,7 +6,7 @@ import TodoList from "../../components/todolist/TodoList";
 import "./AppContent.css";
 
 export const AppContent: FC = () => {
-  
+
   const [oldValue, setOldValue] = useState<string>();
   const [todoListAll, setTodoListAll] = useState<ITask[]>([]);
   const [todoListFiltered, setTodoListFiltered] = useState<ITask[]>([]);
@@ -88,11 +88,12 @@ export const AppContent: FC = () => {
       return;
     }
     const data: ITask = {
-      id: todoList.length < 1 ? 1 : todoList[todoList.length - 1].id + 1,
+      id: todoListFiltered.length < 1 ? 1 : todoListFiltered[todoListFiltered.length - 1].id + 1,
       importance: 0,
       content: todo,
       finished: false,
     };
+    setTodoListFiltered([...todoListFiltered, data]);
     setTodoList([...todoList, data]);
   };
 
@@ -160,6 +161,12 @@ export const AppContent: FC = () => {
   const deleteTodo = (id: number): void => {
     setTodoList(
       todoList.filter((todo: ITask): ITask | null =>
+        todo.id !== id ? todo : null
+      )
+    );
+
+    setTodoListFiltered(
+      todoListFiltered.filter((todo: ITask): ITask | null =>
         todo.id !== id ? todo : null
       )
     );

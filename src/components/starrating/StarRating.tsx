@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
+import { ITask } from "../../models/ITask";
 import "./StarRating.css";
 
-const StarRating = () => {
-  const [rating, setRating] = useState(1);
+interface Props {
+  todo: ITask;
+  key: number;
+}
+
+const StarRating: FC<Props> = ({ todo, key }) => {
+  const [rating, setRating] = useState(todo.importance);
   const [hover, setHover] = useState(0);
   return (
     <div className="star-rating">

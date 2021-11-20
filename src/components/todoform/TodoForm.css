@@ -4,12 +4,14 @@
     width: 100%;
     height: 40px;
   }
+
   .todoForm .form-group {
     position: relative;
     display: flex;
     width: 100%;
     height: 100%;
   }
+
   .todoForm .form-group input:not([type="submit"]) {
     flex: 90%;
     padding: 10px 15px;
@@ -17,6 +19,7 @@
     border-right: 0;
     outline: none;
   }
+  
   .todoForm .form-group input[type="submit"] {
     flex: 10%;
     padding: 10px 15px;

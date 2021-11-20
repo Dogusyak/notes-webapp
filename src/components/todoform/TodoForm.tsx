@@ -3,19 +3,20 @@ import "./TodoForm.css";
 
 interface Props {
   addTodo(todo: string): void;
-  searchTodo(todoName:string):void;
+  searchTodo(todoName: string): void;
 }
 
-const TodoForm: FC<Props> = ({ addTodo }) => {
+const TodoForm: FC<Props> = ({ addTodo, searchTodo }) => {
+
   const [todo, setTodo] = useState<string>("");
-  const [todoName, searchTodo] = useState<string>("");
+  searchTodo(todo);
 
   const handleTodo = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     addTodo(todo);
-    searchTodo(todoName);
     setTodo("");
   };
+
   return (
     <form className="todoForm" onSubmit={handleTodo}>
       <div className="form-group">

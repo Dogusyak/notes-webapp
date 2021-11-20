@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {IHeaderProps} from "./types/IHeaderProps";
+import { IHeaderProps } from "./types/IHeaderProps";
 import './Header.css';
 
 class TodoHeader extends React.Component<IHeaderProps, {}> {

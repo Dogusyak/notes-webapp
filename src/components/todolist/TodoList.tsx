@@ -1,26 +1,24 @@
 import React, { FC } from "react";
 import { ITask } from "../../models/ITask";
 import StarRating from "../starrating/StarRating";
-
 import "./TodoList.css";
 
 interface Props {
   todo: ITask;
   key: number;
-  setChecked(id:number):boolean;
-  rateTodo(id:number, importance:number):void;
+  setChecked(id: number): boolean;
+  rateTodo(id: number, importance: number): void;
   completeTodo(id: number): void;
-  undoCompleteTodo(id:number):void;
+  undoCompleteTodo(id: number): void;
   deleteTodo: (id: number) => void;
 }
 
-const TodoList: FC<Props> = ({ todo, key,setChecked, rateTodo, completeTodo, undoCompleteTodo, deleteTodo }) => {
+const TodoList: FC<Props> = ({ todo, key, setChecked, rateTodo, completeTodo, undoCompleteTodo, deleteTodo }) => {
   const todoComplete = (): void => {
     if (!todo.finished) {
       completeTodo(todo.id);
     }
-    else
-    {
+    else {
       undoCompleteTodo(todo.id);
     }
   };
@@ -29,13 +27,16 @@ const TodoList: FC<Props> = ({ todo, key,setChecked, rateTodo, completeTodo, und
     deleteTodo(todo.id);
   };
 
-  const todoRating =(): void =>{
-    rateTodo(todo.id, todo.importance);
-  }
+
   return (
-    <div key={key} className="todolist">  
+    <div key={key} className="todolist">
       <input type="checkbox" id="todoCheckbox" checked={setChecked(todo.id)} onChange={todoComplete}></input>
-      <StarRating/>
+      <div className="star-rating">
+            <StarRating
+              key={key}
+              todo={todo}
+            />
+        </div>
       <h1
         style={
           todo.finished ? { pointerEvents: "none" } : { cursor: "pointer" }
@@ -49,9 +50,9 @@ const TodoList: FC<Props> = ({ todo, key,setChecked, rateTodo, completeTodo, und
           todo.content
         )}
       </h1>
-        <button id="delete" type="button" onClick={todoDelete}>
-          Delete
-        </button>
+      <button id="delete" type="button" onClick={todoDelete}>
+        Delete
+      </button>
     </div>
   );
 };

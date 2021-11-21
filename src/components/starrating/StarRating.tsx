@@ -10,11 +10,6 @@ const StarRating: FC<Props> = ({ importance, rateTodo }) => {
   const [rating, setRating] = useState(importance);
   const [hover, setHover] = useState(0);
 
-  if(rating != importance)
-  {
-    setRating(importance);
-  }
-
   const todoRate = (index: number): void => {
     setRating(index);
     rateTodo(index);
@@ -24,6 +19,12 @@ const StarRating: FC<Props> = ({ importance, rateTodo }) => {
     <div className="star-rating">
       {[...Array(5)].map((star, index) => {
         index += 1;
+
+        if (rating != importance) {
+          setRating(importance);
+          rateTodo(importance);
+        }
+
         return (
           <button
             type="button"
@@ -36,6 +37,7 @@ const StarRating: FC<Props> = ({ importance, rateTodo }) => {
             <span className="star">&#9733;</span>
           </button>
         );
+        
       })}
     </div>
   );

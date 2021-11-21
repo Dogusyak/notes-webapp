@@ -99,7 +99,7 @@ export const AppContent: FC = () => {
     };
 
     setTodoListFiltered([...todoListFiltered, data]);
-
+    setTodoListAll([...todoListAll,data]);
   };
 
   const rateTodo = (id: number, importance: number): void => {

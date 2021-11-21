@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 import TodoHeader from '../header/Header';
 import AppContent from '../appcontent/AppContent';

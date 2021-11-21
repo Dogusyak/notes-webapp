@@ -5,7 +5,6 @@ import "./TodoList.css";
 
 interface Props {
   todo: ITask;
-  key: number;
   setChecked(id: number): boolean;
   rateTodo(id: number, importance: number): void;
   completeTodo(id: number): void;
@@ -13,7 +12,7 @@ interface Props {
   deleteTodo: (id: number) => void;
 }
 
-const TodoList: FC<Props> = ({ todo, key, setChecked, completeTodo, rateTodo, undoCompleteTodo, deleteTodo }) => {
+const TodoList: FC<Props> = ({ todo, setChecked, completeTodo, rateTodo, undoCompleteTodo, deleteTodo }) => {
 
   const todoComplete = (): void => {
     if (!todo.finished) {
@@ -22,6 +21,7 @@ const TodoList: FC<Props> = ({ todo, key, setChecked, completeTodo, rateTodo, un
     else {
       undoCompleteTodo(todo.id);
     }
+
   };
 
   const todoDelete = (): void => {
@@ -33,10 +33,10 @@ const TodoList: FC<Props> = ({ todo, key, setChecked, completeTodo, rateTodo, un
   };
 
   return (
-    <div key={key} className="todolist">
+    <div className="todolist">
       <input type="checkbox" id="todoCheckbox" checked={setChecked(todo.id)} onChange={todoComplete}></input>
       <StarRating
-        todo={todo}
+        importance={todo.importance}
         rateTodo={todoRate}
       />
       <h1

@@ -1,17 +1,21 @@
 import React, { FC, useState } from "react";
-import { ITask } from "../../models/ITask";
 import "./StarRating.css";
 
 interface Props {
-  todo: ITask;
-  rateTodo(importance:number): void;
+  importance: number;
+  rateTodo(importance: number): void;
 }
 
-const StarRating: FC<Props> = ({ todo, rateTodo }) => {
-  const [rating, setRating] = useState(todo.importance);
+const StarRating: FC<Props> = ({ importance, rateTodo }) => {
+  const [rating, setRating] = useState(importance);
   const [hover, setHover] = useState(0);
 
-  const todoRate = (index:number): void => {
+  if(rating != importance)
+  {
+    setRating(importance);
+  }
+
+  const todoRate = (index: number): void => {
     setRating(index);
     rateTodo(index);
   };

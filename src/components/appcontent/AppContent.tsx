@@ -4,6 +4,7 @@ import TodoForm from "../../components/todoform/TodoForm";
 import ShowAll from "../showall/ShowAll";
 import TodoList from "../../components/todolist/TodoList";
 import "./AppContent.css";
+import { NoToDo } from "../noToDo/noToDo";
 
 export const AppContent: FC = () => {
 
@@ -223,14 +224,15 @@ export const AppContent: FC = () => {
     }
 
   };
-
+  
   const deleteTodo = (id: number): void => {
-
+    
     setTodoList(
       todoList.filter((todo: ITask): ITask | null =>
         todo.id !== id ? todo : null
       )
     );
+
 
     setTodoListFiltered(
       todoListFiltered.filter((todo: ITask): ITask | null =>
@@ -243,7 +245,6 @@ export const AppContent: FC = () => {
         todo.id !== id ? todo : null
       )
     );
-
   };
 
   return (
@@ -264,6 +265,7 @@ export const AppContent: FC = () => {
             />
           ))}
         </div>
+        <NoToDo lenghtOfArray={todoList.length}/>
       </div>
     </div>
   );

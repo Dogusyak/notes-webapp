@@ -20,7 +20,7 @@ const StarRating: FC<Props> = ({ importance, rateTodo }) => {
       {[...Array(5)].map((star, index) => {
         index += 1;
 
-        if (rating != importance) {
+        if (rating !== importance) {
           setRating(importance);
           rateTodo(importance);
         }
@@ -37,7 +37,7 @@ const StarRating: FC<Props> = ({ importance, rateTodo }) => {
             <span className="star">&#9733;</span>
           </button>
         );
-        
+
       })}
     </div>
   );

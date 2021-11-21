@@ -32,20 +32,19 @@ export const AppContent: FC = () => {
       id: 2,
       content: "Hair Dresser",
       importance: 3,
-      finished: true,
+      finished: true
     },
     {
       id: 3,
       content: "Hamam time",
       importance: 4,
-      finished: false,
+      finished: false
     }
   ]);
 
   //This method will be used to filter the list according to a given string. (For example "Cleaning" string text will be searched in the array and be filtered.)
   const filterTask = (todoName: string): void => {
-    {
-      if (todoName && oldValue != todoName) {
+      if (todoName && oldValue !== todoName) {
         if (todoListFiltered.length < TodoList.length) {
           setTodoListFiltered(todoList);
         }
@@ -61,12 +60,11 @@ export const AppContent: FC = () => {
         }
         setOldValue(todoName);
       }
-      else if (!todoName && oldValue && oldValue != todoName) {
+      else if (!todoName && oldValue && oldValue !== todoName) {
         setTodoList(todoListFiltered);
         setOldValue(todoName);
       }
-    }
-
+    
   };
 
   //This method will be used to show complated tasks or all tasks in the list.

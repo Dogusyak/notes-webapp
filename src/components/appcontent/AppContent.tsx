@@ -129,7 +129,7 @@ export const AppContent: FC = () => {
             : todo
       )
     );
-
+    
     setTodoListAll(
       todoListAll.map(
         (todo: ITask): ITask =>

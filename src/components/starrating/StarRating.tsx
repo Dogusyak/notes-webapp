@@ -10,6 +10,11 @@ const StarRating: FC<Props> = ({ importance, rateTodo }) => {
   const [rating, setRating] = useState(importance);
   const [hover, setHover] = useState(0);
 
+  if(rating != importance)
+  {
+    setRating(importance);
+  }
+
   const todoRate = (index: number): void => {
     setRating(index);
     rateTodo(index);

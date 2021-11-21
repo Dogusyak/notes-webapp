@@ -13,7 +13,8 @@ interface Props {
   deleteTodo: (id: number) => void;
 }
 
-const TodoList: FC<Props> = ({ todo, key, setChecked, rateTodo, completeTodo, undoCompleteTodo, deleteTodo }) => {
+const TodoList: FC<Props> = ({ todo, key, setChecked, completeTodo, rateTodo, undoCompleteTodo, deleteTodo }) => {
+
   const todoComplete = (): void => {
     if (!todo.finished) {
       completeTodo(todo.id);
@@ -27,16 +28,17 @@ const TodoList: FC<Props> = ({ todo, key, setChecked, rateTodo, completeTodo, un
     deleteTodo(todo.id);
   };
 
+  const todoRate = (index: number): void => {
+    rateTodo(todo.id, index);
+  };
 
   return (
     <div key={key} className="todolist">
       <input type="checkbox" id="todoCheckbox" checked={setChecked(todo.id)} onChange={todoComplete}></input>
-      <div className="star-rating">
-            <StarRating
-              key={key}
-              todo={todo}
-            />
-        </div>
+      <StarRating
+        todo={todo}
+        rateTodo={todoRate}
+      />
       <h1
         style={
           todo.finished ? { pointerEvents: "none" } : { cursor: "pointer" }

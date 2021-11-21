@@ -21,8 +21,7 @@ const StarRating: FC<Props> = ({ importance, rateTodo }) => {
         index += 1;
 
         if (rating !== importance) {
-          setRating(importance);
-          rateTodo(importance);
+          setRating(importance);    
         }
 
         return (

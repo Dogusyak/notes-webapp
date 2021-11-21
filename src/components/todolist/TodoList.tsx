@@ -22,6 +22,7 @@ const TodoList: FC<Props> = ({ todo, key, setChecked, completeTodo, rateTodo, un
     else {
       undoCompleteTodo(todo.id);
     }
+
   };
 
   const todoDelete = (): void => {
@@ -36,7 +37,7 @@ const TodoList: FC<Props> = ({ todo, key, setChecked, completeTodo, rateTodo, un
     <div key={key} className="todolist">
       <input type="checkbox" id="todoCheckbox" checked={setChecked(todo.id)} onChange={todoComplete}></input>
       <StarRating
-        todo={todo}
+        importance={todo.importance}
         rateTodo={todoRate}
       />
       <h1
